@@ -1,5 +1,6 @@
 import { Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
+import { MoonLoader } from "react-spinners";
 import Navigation from "../Navigation/Navigation";
 import "./App.css";
 
@@ -22,7 +23,15 @@ function App() {
   return (
     <>
       <Navigation />
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense
+        fallback={
+          <MoonLoader
+            color="#d15065"
+            cssOverride={{ margin: "20px 0" }}
+            size="80px"
+          />
+        }
+      >
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/movies" element={<MoviesPage />} />

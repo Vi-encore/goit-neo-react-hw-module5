@@ -1,12 +1,16 @@
 import { useState, useEffect } from "react";
+import { MoonLoader } from "react-spinners";
 import { fetchTrendingMovies } from "../../api/fetchMovies";
 import MovieList from "../../components/MovieList/MovieList";
+import css from "./HomePage.module.css";
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
+import ShowMoreBtn from "../../components/ShowMoreBtn/ShowMoreBtn";
 
 export default function HomePage() {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-
+  const [showError, setShowError] = useState(false);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(null);
 
@@ -17,35 +21,76 @@ export default function HomePage() {
       try {
         setIsLoading(true);
         setError(null);
+        setShowError(false);
+
         const data = await fetchTrendingMovies(page);
+        if (!data || !data.results || data.results.length === 0) {
+          throw new Error("No movies found at the moment.");
+        }
+
         if (!ignore) {
-          console.log(data);
           setMovies((prev) =>
             page === 1 ? data.results : [...prev, ...data.results]
           );
           setTotalPages(data.total_pages);
         }
-      } catch (error) {
+      } catch (err) {
         if (!ignore) {
-          console.log(error);
-          setError(error);
+          setError(err.message || "Something went wrong");
         }
       } finally {
-        setIsLoading(false);
+        if (!ignore) {
+          setIsLoading(false);
+        }
       }
     }
 
     loadMovies();
 
     return () => {
-      ignore = true; 
+      ignore = true;
     };
   }, [page]);
 
+  useEffect(() => {
+    if (error) {
+      const timer = setTimeout(() => {
+        setShowError(true);
+      }, 2000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [error]);
+
+  useEffect(() => {
+    if (page > 1 && !isLoading && movies.length > 0) {
+      window.scrollTo({
+        top: document.documentElement.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+  }, [movies, isLoading, page]);
+
   return (
-    <>
-      Home
-      <MovieList movies={movies} />
-    </>
+    <div className={css.home}>
+      <h1 className={css.header}>Trending today</h1>
+      {movies.length > 0 && <MovieList movies={movies} />}
+
+      {showError && (
+        <div className={css.errorContainer}>
+          <ErrorMessage error={error} />
+          {/* <button onClick={() => setPage(page)}>Retry</button> */}
+        </div>
+      )}
+
+      {(isLoading || (error && !showError)) && (
+        <div className={css.loaderWrapper}>
+          <MoonLoader color="#d15065" size="80px" loading={true} />
+        </div>
+      )}
+      {movies.length > 0 && page < totalPages && !isLoading && !showError && (
+        <ShowMoreBtn onShowMore={() => setPage((page) => page + 1)} />
+      )}
+    </div>
   );
 }
