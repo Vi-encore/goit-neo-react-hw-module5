@@ -4,7 +4,7 @@ import { fetchTrendingMovies } from "../../api/fetchMovies";
 import MovieList from "../../components/MovieList/MovieList";
 import css from "./HomePage.module.css";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
-import ShowMoreBtn from "../../components/ShowMoreBtn/ShowMoreBtn";
+import Button from "../../components/Button/Button";
 
 export default function HomePage() {
   const [movies, setMovies] = useState([]);
@@ -24,7 +24,7 @@ export default function HomePage() {
         setShowError(false);
 
         const data = await fetchTrendingMovies(page);
-        if (!data || !data.results || data.results.length === 0) {
+        if (!data?.results?.length) {
           throw new Error("No movies found at the moment.");
         }
 
@@ -83,13 +83,11 @@ export default function HomePage() {
         </div>
       )}
 
-      {(isLoading || (error && !showError)) && (
-        <div className={css.loaderWrapper}>
-          <MoonLoader color="#d15065" size="80px" loading={true} />
-        </div>
+      {error && !showError && (
+        <MoonLoader color="#d15065" size="80px" loading={isLoading} />
       )}
       {movies.length > 0 && page < totalPages && !isLoading && !showError && (
-        <ShowMoreBtn onShowMore={() => setPage((page) => page + 1)} />
+        <Button onClick={() => setPage((page) => page + 1)}>Show More</Button>
       )}
     </div>
   );

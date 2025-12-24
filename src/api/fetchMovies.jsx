@@ -17,3 +17,27 @@ export async function fetchTrendingMovies(page = 1) {
   });
   return res.data;
 }
+
+export async function fetchMovie(id) {
+  const res = await axios.get(`${BASE_URL}/movie/${id}`, {
+    headers,
+  });
+
+  return res.data;
+}
+
+export async function fetchMovieCast(id) {
+  const res = await axios.get(`${BASE_URL}/movie/${id}/credits`, {
+    headers,
+  });
+
+  return res.data;
+}
+
+export async function fetchMovieReviews(id) {
+  const res = await axios.get(`${BASE_URL}/movie/${id}/reviews`, {
+    headers,
+  });
+
+  return res.data;
+}
