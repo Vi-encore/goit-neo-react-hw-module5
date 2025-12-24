@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import css from "./Navigation.module.css";
 
 const navLinks = [
   { to: "/", label: "Home" },
@@ -7,9 +8,15 @@ const navLinks = [
 
 export default function Navigation() {
   return (
-    <nav>
+    <nav className={css.header}>
       {navLinks.map(({ to, label }) => (
-        <NavLink key={to} to={to}>
+        <NavLink
+          key={to}
+          to={to}
+          className={({ isActive }) =>
+            isActive ? `${css["nav-link"]} ${css.active}` : css["nav-link"]
+          }
+        >
           {label}
         </NavLink>
       ))}
