@@ -29,6 +29,10 @@
   object-fit: cover;
 }
 
+.title {
+  margin-top: 0;
+}
+
 .genres {
   display: flex;
   flex-direction: row;
@@ -54,6 +58,7 @@
 
   list-style: none;
   padding: 0;
+  margin-bottom: 0;
 }
 
 .list-item {
@@ -67,4 +72,10 @@
 
 .active {
   color: #ee2d4d;
+}
+
+@media screen and (max-width: 720px) {
+  .details-main {
+    flex-direction: column;
+  }
 }

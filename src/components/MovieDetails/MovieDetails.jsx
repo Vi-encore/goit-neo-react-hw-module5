@@ -22,7 +22,7 @@ export default function MovieDetails({
         </div>
         <div>
           <div>
-            <h1>
+            <h1 className={css.title}>
               {title} ({release_date.slice(0, 4)})
             </h1>
             <p>User score: {vote_average}</p>

@@ -34,9 +34,24 @@ export async function fetchMovieCast(id) {
   return res.data;
 }
 
-export async function fetchMovieReviews(id) {
+export async function fetchMovieReviews(id, page = 1) {
   const res = await axios.get(`${BASE_URL}/movie/${id}/reviews`, {
     headers,
+    params: {
+      page,
+    },
+  });
+
+  return res.data;
+}
+
+export async function fetchMoviesByQuery(query, page = 1) {
+  const res = await axios.get(`${BASE_URL}/search/movie`, {
+    headers,
+    params: {
+      page,
+      query
+    },
   });
 
   return res.data;

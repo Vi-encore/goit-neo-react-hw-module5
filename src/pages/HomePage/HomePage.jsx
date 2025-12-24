@@ -56,7 +56,7 @@ export default function HomePage() {
     if (error) {
       const timer = setTimeout(() => {
         setShowError(true);
-      }, 2000);
+      }, 0);
 
       return () => clearTimeout(timer);
     }
@@ -76,14 +76,9 @@ export default function HomePage() {
       <h1 className={css.header}>Trending today</h1>
       {movies.length > 0 && <MovieList movies={movies} />}
 
-      {showError && (
-        <div className={css.errorContainer}>
-          <ErrorMessage error={error} />
-          {/* <button onClick={() => setPage(page)}>Retry</button> */}
-        </div>
-      )}
+      {showError && <ErrorMessage error={error} />}
 
-      {error && !showError && (
+      {!error && !showError && (
         <MoonLoader color="#d15065" size="80px" loading={isLoading} />
       )}
       {movies.length > 0 && page < totalPages && !isLoading && !showError && (
