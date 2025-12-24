@@ -48,7 +48,11 @@ export default function MovieDetailsPage() {
     <div className={css.wrap}>
       {error && <ErrorMessage error={error} />}
       {!error && <MoonLoader color="#d15065" size="80px" loading={isLoading} />}
-      {!isLoading && <Button onClick={handleGoBack}>Go Back</Button>}
+      {!isLoading && (
+        <div className={css['btn-wrap']}>
+          <Button onClick={handleGoBack}>Go Back</Button>
+        </div>
+      )}
       {!isLoading && !error && movieDetails && (
         <>
           <MovieDetails movie={movieDetails} />

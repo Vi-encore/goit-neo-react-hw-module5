@@ -1,0 +1,31 @@
+.wrap {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-form {
+  margin: 20px 0;
+}
+
+.search-input {
+  outline: none;
+  border: 2px solid rgba(163, 163, 163, 0.627);
+  border-radius: 4px;
+  padding: 8px 16px;
+  max-width: 350px;
+  width: 100%;
+
+  transition: border-color 0.15s ease-in-out;
+}
+
+.search-input:hover {
+  border-color: #d26c7d;
+}
+
+.search-input:focus,
+.search-input:focus-visible {
+  border-color: #ee2d4d;
+}
