@@ -82,7 +82,10 @@ export default function HomePage() {
         <MoonLoader color="#d15065" size="80px" loading={isLoading} />
       )}
       {movies.length > 0 && page < totalPages && !isLoading && !showError && (
-        <Button onClick={() => setPage((page) => page + 1)}>Show More</Button>
+        <Button
+          onClick={() => setPage((page) => page + 1)}
+          text={"Show More"}
+        />
       )}
     </div>
   );

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import css from './MovieCard.module.css'
 
 export default function MovieCard({ title, image }) {
@@ -7,4 +8,9 @@ export default function MovieCard({ title, image }) {
       <h2 className={css['card-title']}>{title}</h2>
     </div>
   );
+}
+
+MovieCard.propTypes = {
+  title: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired
 }

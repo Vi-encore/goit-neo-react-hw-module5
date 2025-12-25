@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import MovieCard from "../MovieCard/MovieCard";
 import css from "./MovieList.module.css";
+import PropTypes from "prop-types";
 
 export default function MovieList({ movies }) {
   const location = useLocation();
@@ -17,3 +18,7 @@ export default function MovieList({ movies }) {
     </ul>
   );
 }
+
+MovieList.propTypes = {
+  movies: PropTypes.arrayOf(PropTypes.object).isRequired,
+};

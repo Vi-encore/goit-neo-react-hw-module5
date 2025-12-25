@@ -49,8 +49,8 @@ export default function MovieDetailsPage() {
       {error && <ErrorMessage error={error} />}
       {!error && <MoonLoader color="#d15065" size="80px" loading={isLoading} />}
       {!isLoading && (
-        <div className={css['btn-wrap']}>
-          <Button onClick={handleGoBack}>Go Back</Button>
+        <div className={css["btn-wrap"]}>
+          <Button onClick={handleGoBack} text={"Go Back"} />
         </div>
       )}
       {!isLoading && !error && movieDetails && (
