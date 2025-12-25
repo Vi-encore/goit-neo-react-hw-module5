@@ -1,0 +1,18 @@
+.wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.return-link {
+  font-size: 20px;
+  color: #d15065;
+  transition: color .15s ease-in-out;
+}
+
+.return-link:hover {
+  color: #ee2d4d;
+
+}
