@@ -1,5 +1,6 @@
 import { NavLink, useParams } from "react-router-dom";
 import css from "./MovieDetails.module.css";
+import PropTypes from "prop-types";
 
 export default function MovieDetails({
   movie: { poster_path, title, release_date, genres, vote_average, overview },
@@ -65,3 +66,14 @@ export default function MovieDetails({
     </>
   );
 }
+
+MovieDetails.propTypes = {
+  movie: PropTypes.shape({
+    poster_path: PropTypes.string,
+    title: PropTypes.string.isRequired,
+    release_date: PropTypes.string,
+    genres: PropTypes.arrayOf(PropTypes.string),
+    vote_average: PropTypes.number,
+    overview: PropTypes.string,
+  }).isRequired,
+};
