@@ -1,15 +1,19 @@
 .show-more-btn {
-  margin-bottom: 20px;
+  margin: 0 0 20px;
+  padding: 10px 20px;
   color: rgb(255, 255, 255);
   background-color: #bd5264;
   font-size: 20px;
   border: 0;
+  border-radius: 8px;
+  display: block;
 
-  transition: background-color .15s ease-in-out;
+  transition: all 0.15s ease-in-out;
 }
 
 .show-more-btn:hover {
   border: none;
   outline: none;
   background-color: #c33b51;
+  color: rgb(255, 255, 255);
 }

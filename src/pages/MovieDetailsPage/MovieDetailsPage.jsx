@@ -1,5 +1,9 @@
 import { Suspense, useEffect, useRef, useState } from "react";
-import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
+import {
+  Outlet,
+  useLocation,
+  useParams,
+} from "react-router-dom";
 import { MoonLoader } from "react-spinners";
 
 import Button from "../../components/Button/Button";
@@ -12,7 +16,6 @@ export default function MovieDetailsPage() {
   const location = useLocation();
   const goBackRef = useRef(location.state ?? "/movies");
   const { movieId } = useParams();
-  const goToUrl = useNavigate();
 
   const [movieDetails, setMovieDetails] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -40,9 +43,6 @@ export default function MovieDetailsPage() {
     getMovie();
   }, [movieId]);
 
-  function handleGoBack() {
-    goToUrl(goBackRef.current);
-  }
 
   return (
     <div className={css.wrap}>
@@ -50,7 +50,7 @@ export default function MovieDetailsPage() {
       {!error && <MoonLoader color="#d15065" size="80px" loading={isLoading} />}
       {!isLoading && (
         <div className={css["btn-wrap"]}>
-          <Button onClick={handleGoBack} text={"Go Back"} />
+          <Button to={goBackRef.current} text={"Go Back"} />
         </div>
       )}
       {!isLoading && !error && movieDetails && (
